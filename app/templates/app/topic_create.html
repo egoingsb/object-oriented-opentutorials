@@ -1,0 +1,15 @@
+{%extends 'app/topic_base.html'%}
+{% block content %}
+<ul>
+    <li><a href="/topic/create">create</a></li>
+</ul>
+<article>
+    <form action="" method="POST">
+        {% csrf_token %}
+        <table>
+            {{form}}
+        </table>
+        <input type="submit" value="제출">
+    </fomr>
+</article>
+{% endblock %}

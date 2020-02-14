@@ -7,7 +7,7 @@
         </ul>
         <ol>
             {% for item in contents %}
-                <ul><a href="/topic/{{item.id}}">{{item.title}}</a></ul>
+                <li><a href="/topic/{{item.id}}">{{item.title}}</a></li>
             {% endfor %}
         </ol>
         {%block content%}

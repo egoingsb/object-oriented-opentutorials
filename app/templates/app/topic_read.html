@@ -1,6 +1,8 @@
 {%extends 'app/topic_base.html'%}
-
 {% block content %}
+<ul>
+    <li><a href="/topic/create">create</a></li>
+</ul>
 <article>
     {% if content %}
         <h2>{{content.title}}</h2>
