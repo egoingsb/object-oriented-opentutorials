@@ -3,8 +3,12 @@ from django.http import HttpResponse
 from .models import Topic
 
 # Create your views here.
-def index(request):
+def index(request, topic_id=None):
+    topic = None
+    if(topic_id):
+        topic=Topic.objects.get(id=topic_id)
     return render(request, 'app/index.html', {
-        'contents':Topic.objects.all()
+        'contents':Topic.objects.all(),
+        'content':topic
     })
 
