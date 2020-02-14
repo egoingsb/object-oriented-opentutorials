@@ -1,0 +1,13 @@
+<html>
+    <body>
+        <h1>Object Orineted Opentutorials</h1>
+        <ol>
+            {% for item in contents %}
+                <ul><a href="/topic/{{item.id}}">{{item.title}}</a></ul>
+            {% endfor %}
+        </ol>
+        <article>
+            
+        </article>
+    </body>
+</html>
