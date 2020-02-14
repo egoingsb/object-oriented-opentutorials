@@ -1,0 +1,13 @@
+{%extends 'app/topic_base.html'%}
+
+{% block content %}
+<article>
+    {% if content %}
+        <h2>{{content.title}}</h2>
+        {{content.description}}
+    {% else %}
+        <h2>Hello</h2>
+        Welcome
+    {% endif %}
+</article>
+{% endblock %}

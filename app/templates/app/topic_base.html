@@ -1,19 +1,16 @@
 <html>
     <body>
         <h1><a href="/">Object Orineted Opentutorials</a></h1>
+        <ul>
+            <li><a href="/">topics</a></li>
+            <li><a href="/genres">genres</a></li>
+        </ul>
         <ol>
             {% for item in contents %}
                 <ul><a href="/topic/{{item.id}}">{{item.title}}</a></ul>
             {% endfor %}
         </ol>
-        <article>
-            {% if content %}
-                <h2>{{content.title}}</h2>
-                {{content.description}}
-            {% else %}
-                <h2>Hello</h2>
-                Welcome
-            {% endif %}
-        </article>
+        {%block content%}
+        {%endblock%}
     </body>
 </html>
