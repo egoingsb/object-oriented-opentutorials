@@ -19,7 +19,7 @@ class Topic(models.Model):
 class TopicForm(ModelForm):
     class Meta:
         model = Topic
-        fields = ['title', 'description']
+        fields = ['title', 'description', 'genre']
 
 class GenreForm(ModelForm):
     class Meta:
