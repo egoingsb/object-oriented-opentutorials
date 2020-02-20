@@ -84,7 +84,7 @@ def genre_create(request):
         form = GenreForm(request.POST)
         if(form.is_valid()):
             post = form.save()
-            return redirect('/genre')
+            return redirect('/genre/'+str(post.id))
     return render(request, 'app/genre_create.html', {
         'form':GenreForm(),
         'contents':Genre.objects.all(),

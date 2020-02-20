@@ -6,14 +6,15 @@
 <article>
     {% if content %}
         <h2>{{content.title}}</h2>
-        {{content.description}}
+        <textarea style="width:100%; height:200px;">{{content.description | safe}}</textarea>
     {% else %}
-        <h2>Hello</h2>
-        Welcome
+        <h2>Genre</h2>
+        Genre's Home
     {% endif %}
     {% for topic in topics %}
-        <div>
-            <h2>{{topic.title}}</h2>
+        <div style="width:100%; border:1px solid gray; margin-top:1rem; padding:1rem; box-sizing:border-box">
+            <h2 style="border-bottom:1px solid gray;">{{topic.title}}</h2>
+            {{topic.description | safe}}
         </div>
     {% endfor %}
 </article>
