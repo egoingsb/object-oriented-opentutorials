@@ -1,6 +1,9 @@
 from django.shortcuts import render,redirect
 from django.http import HttpResponse
 from .models import Topic, TopicForm, Genre, GenreForm
+from bs4 import BeautifulSoup
+from django.contrib import messages
+
 
 # Create your views here.
 def index(request, topic_id=None):
@@ -15,13 +18,21 @@ def index(request, topic_id=None):
     
 
 def topic_create(request):
+    form = TopicForm()
     if(request.method == "POST"):
         form = TopicForm(request.POST)
         if(form.is_valid()):
-            post = form.save()
-            return redirect('/')
+            genre_tag = [y for x in form.cleaned_data['genre'] for y in BeautifulSoup(x.description, 'html.parser').findAll(['h1','h2','h3','h4','h5','h6'])]
+            description_tag = BeautifulSoup(form.cleaned_data['description'], 'html.parser').findAll(['h1','h2','h3','h4','h5','h6'])
+            diff = set(genre_tag) - set(description_tag)
+            if len(diff):
+                messages.error(request, '장르와 일치하지 않습니다.요소가 누락 되었습니다'.join([str(tag) for tag in diff]))
+            else:
+                post = form.save()
+                return redirect('/')
+
     return render(request, 'app/topic_create.html', {
-        'form':TopicForm(),
+        'form':form,
         'contents':Topic.objects.all(),
         'mode':'topic'
     })

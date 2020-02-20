@@ -4,12 +4,17 @@
     <li><a href="/topic/create">create</a></li>
 </ul>
 <article>
+    {% if messages %}
+        {% for message in messages %}
+            {{ message }}
+        {% endfor %}
+    {% endif %}
     <form action="" method="POST">
         {% csrf_token %}
         <table>
             {{form}}
         </table>
         <input type="submit" value="제출">
-    </fomr>
+    </form>
 </article>
 {% endblock %}
