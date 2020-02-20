@@ -6,17 +6,39 @@ from django.contrib import messages
 from django.http import JsonResponse
 
 # Create your views here.
-def index(request, topic_id=None):
-    item = None
-    if(topic_id):
-        item=Topic.objects.get(id=topic_id)
-    return render(request, 'app/topic_read.html', {
+def index(request):
+    return render(request, 'app/index.html', {})
+    
+def topic_index(request):  
+    return render(request, 'app/topic_index.html', {
         'contents':Topic.objects.all(),
-        'content':item,
         'mode':'topic'
     })
-    
 
+def topic_read(request, topic_id=None):
+    item = None
+    if(topic_id):
+        item=Topic.objects.get(id=topic_id)    
+        genres = item.genre.all()
+        return render(request, 'app/topic_read.html', {
+            'contents':Topic.objects.all(),
+            'content':item,
+            'genres':genres,
+            'mode':'topic'
+        })
+
+# def topic_read(request, topic_id=None):
+#     item = None
+#     if(topic_id):
+#         item=Topic.objects.get(id=topic_id)
+#     return render(request, 'app/t_read.html', {
+#         'contents':Genre.objects.all(),
+#         'content':item,
+#         'topics':topics,
+#         'mode':'genre'
+#     })
+
+    
 def topic_create(request):
     form = TopicForm()
     if(request.method == "POST"):
@@ -29,7 +51,7 @@ def topic_create(request):
                 messages.error(request, '장르와 일치하지 않습니다.요소가 누락 되었습니다\n'+','.join([str(tag) for tag in diff]))
             else:
                 post = form.save()
-                return redirect('/')
+                return redirect('/topic/'+str(post.id))
 
     return render(request, 'app/topic_create.html', {
         'form':form,
@@ -40,13 +62,17 @@ def topic_create(request):
 
 def genre_read(request, genre_id=None):
     item = None
+    topics = []
     if(genre_id):
         item=Genre.objects.get(id=genre_id)
+        topics = Topic.objects.filter(genre__id=genre_id)
     return render(request, 'app/genre_read.html', {
         'contents':Genre.objects.all(),
         'content':item,
+        'topics':topics,
         'mode':'genre'
     })
+
 
 def genre_read_one(request, genre_id):
     item=Genre.objects.get(id=genre_id)
