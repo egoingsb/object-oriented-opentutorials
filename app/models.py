@@ -12,7 +12,7 @@ class Topic(models.Model):
     title = models.CharField(max_length=100)
     description = models.TextField()
     pub_date = models.DateTimeField('publish date', auto_now_add=True, blank=True)
-    genre = models.ManyToManyField(Genre)
+    genre = models.ManyToManyField(Genre, null=True, blank=True)
     def __str__(self):
         return self.title
 

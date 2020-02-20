@@ -3,7 +3,7 @@ from django.http import HttpResponse
 from .models import Topic, TopicForm, Genre, GenreForm
 from bs4 import BeautifulSoup
 from django.contrib import messages
-
+from django.http import JsonResponse
 
 # Create your views here.
 def index(request, topic_id=None):
@@ -26,7 +26,7 @@ def topic_create(request):
             description_tag = BeautifulSoup(form.cleaned_data['description'], 'html.parser').findAll(['h1','h2','h3','h4','h5','h6'])
             diff = set(genre_tag) - set(description_tag)
             if len(diff):
-                messages.error(request, '장르와 일치하지 않습니다.요소가 누락 되었습니다'.join([str(tag) for tag in diff]))
+                messages.error(request, '장르와 일치하지 않습니다.요소가 누락 되었습니다\n'+','.join([str(tag) for tag in diff]))
             else:
                 post = form.save()
                 return redirect('/')
@@ -47,6 +47,10 @@ def genre_read(request, genre_id=None):
         'content':item,
         'mode':'genre'
     })
+
+def genre_read_one(request, genre_id):
+    item=Genre.objects.get(id=genre_id)
+    return JsonResponse({'title':item.title, 'desc':item.description})
 
 
 def genre_create(request):

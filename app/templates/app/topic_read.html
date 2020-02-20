@@ -6,7 +6,7 @@
 <article>
     {% if content %}
         <h2>{{content.title}}</h2>
-        {{content.description}}
+        {{content.description | safe}}
     {% else %}
         <h2>Hello</h2>
         Welcome

@@ -14,6 +14,20 @@
         <table>
             {{form}}
         </table>
+        <script>
+        document.querySelector('#id_genre').addEventListener(
+            'change', 
+            (e)=>{
+                fetch('/genre_json/'+e.target.value)
+                    .then((result)=>result.json())
+                    .then((json)=>{
+                        console.log(json);
+                        var desc = document.querySelector('#id_description').value;
+                        document.querySelector('#id_description').value = desc+`<!-- ${json.title} -->\n${json.desc}\n\n`
+                    })
+            }
+        )
+        </script>
         <input type="submit" value="제출">
     </form>
 </article>
