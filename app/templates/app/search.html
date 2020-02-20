@@ -1,0 +1,16 @@
+<html>
+    <body>
+        <h1><a href="/">Object Orineted Opentutorials</a></h1>
+        {% include "app/menu.html" %}
+        <article>
+            <form action="/search">
+                <select name="genre">
+                {% for genre in contents %}
+                    <option>{{genre}}</option>
+                {% endfor %}
+                </select> 
+                <input type="text" name="keyword">
+            </form>
+        </article>
+    </body>
+</html>

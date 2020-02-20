@@ -8,7 +8,15 @@ from django.http import JsonResponse
 # Create your views here.
 def index(request):
     return render(request, 'app/index.html', {})
-    
+
+def search_index(request, keyword=""):
+    genres = Genre.objects.all()
+    return render(request, 'app/search.html', {
+        'contents':genres,
+        'keyword':keyword
+    })
+
+
 def topic_index(request):  
     return render(request, 'app/topic_index.html', {
         'contents':Topic.objects.all(),

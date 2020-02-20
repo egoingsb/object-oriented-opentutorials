@@ -1,10 +1,7 @@
 <html>
     <body>
         <h1><a href="/">Object Orineted Opentutorials</a></h1>
-        <ul>
-            <li><a href="/topic">topics</a></li>
-            <li><a href="/genre">genres</a></li>
-        </ul>
+        {% include "app/menu.html" %}
         <ol>
             {% for item in contents %}
                 <li><a href="/{{mode}}/{{item.id}}">{{item.title}}</a></li>

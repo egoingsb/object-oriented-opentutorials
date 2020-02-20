@@ -5,14 +5,17 @@
 </ul>
 <article>
     {% if content %}
-        <h2>{{content.title}}</h2>
+        <div>
+            <h2 style="display:inline">{{content.title}}</h2> implements 
+            {% for genre in genres %}
+                <a href="/genre/{{genre.id}}">{{genre.title}}</a><span class="comma">,</span>
+            {% endfor %}
+            <script>
+                document.querySelectorAll('.comma')[document.querySelectorAll('.comma').length-1].remove()
+            </script>
+        </div>
         {{content.description | safe}}
         <div>
-        <ul>
-        {% for genre in genres %}
-            <li><a href="/genre/{{genre.id}}">{{genre.title}}</a></li>
-        {% endfor %}
-        </ul>
         </div>
     {% else %}
         <h2>Hello</h2>

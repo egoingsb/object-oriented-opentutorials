@@ -9,5 +9,7 @@ urlpatterns = [
     path('genre/', views.genre_read),
     path('genre/create', views.genre_create),
     path('genre/<int:genre_id>', views.genre_read),
-    path('genre_json/<int:genre_id>', views.genre_read_one)
+    path('genre_json/<int:genre_id>', views.genre_read_one),
+    path('search/', views.search_index),
+    path('search/<str:genre>/<str:keyword>', views.search_index)
 ]
